@@ -29,6 +29,8 @@ public class UiManager : MonoBehaviour
     private Slider frequencySlider;
     [SerializeField]
     private SocketIOManager socketManager;
+    [SerializeField]
+    private JSFunctCalls jsFunctCalls;
 
 
     [Header("Popus UI")]
@@ -193,6 +195,17 @@ public class UiManager : MonoBehaviour
 
         if (frequencySlider) frequencySlider.onValueChanged.AddListener(UpdateFrequency);
 
+        if (jsFunctCalls != null)
+            jsFunctCalls.RegisterVisibilityListener(gameObject.name);
+
+    }
+
+    public void OnFocusChanged(string value)
+    {
+        bool focused = value == "1";
+        Debug.Log("UNITY FOCUS CHANGED: " + value + " (focused: " + focused + ")");
+        audioController?.SetMuteAll(!focused);
+        socketManager?.HandleFocusChange(focused);
     }
 
 
