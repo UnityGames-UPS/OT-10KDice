@@ -70,6 +70,7 @@ public class SocketIOManager : MonoBehaviour
   private Coroutine focusCheckRoutine;
   private float maxBackgroundTime = 60f;
   private bool isExiting = false;
+  internal bool IsExiting => isExiting;
 
   private void Awake()
   {
@@ -87,6 +88,7 @@ public class SocketIOManager : MonoBehaviour
   void CloseGame()
   {
     Debug.Log("Unity: Closing Game");
+    if (isExiting) return;
     StartCoroutine(CloseSocket());
   }
 
@@ -280,8 +282,13 @@ public class SocketIOManager : MonoBehaviour
   {
     Debug.LogWarning("⚠️ Disconnected from server.");
     isConnected = false;
-    uiManager.DisconnectionPopup();
     ResetPingRoutine();
+    if (isExiting)
+    {
+      Debug.Log("Disconnect caused by intentional exit — skipping popup");
+      return;
+    }
+    uiManager.DisconnectionPopup();
   } //Back2 end
   private void OnError(Error err)
   {
@@ -352,6 +359,8 @@ public class SocketIOManager : MonoBehaviour
   {
     while (true)
     {
+      if (isExiting) yield break;
+
       if (missedPongs == 0)
       {
         uiManager.CheckAndClosePopups();
@@ -418,9 +427,15 @@ public class SocketIOManager : MonoBehaviour
 
   internal IEnumerator CloseSocket() //Back2 Start
   {
+    if (isExiting) yield break;
     isExiting = true;
     RaycastBlocker.SetActive(true);
     ResetPingRoutine();
+    if (focusCheckRoutine != null)
+    {
+      StopCoroutine(focusCheckRoutine);
+      focusCheckRoutine = null;
+    }
 
     Debug.Log("Closing Socket");
 

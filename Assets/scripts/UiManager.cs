@@ -228,14 +228,13 @@ public class UiManager : MonoBehaviour
 
     internal void DisconnectionPopup()
     {
-        if (!isExit)
-        {
-            OpenPopup(DisconnectPopup_Object);
-        }
+        if (isExit || socketManager.IsExiting) return;
+        OpenPopup(DisconnectPopup_Object);
     }
 
     internal void ReconnectionPopup()
     {
+        if (isExit || socketManager.IsExiting) return;
         OpenPopup(ReconnectPopup_Object);
     }
 
@@ -261,8 +260,8 @@ public class UiManager : MonoBehaviour
 
     private void CallOnExitFunction()
     {
-        StartCoroutine(socketManager.CloseSocket());
         isExit = true;
+        StartCoroutine(socketManager.CloseSocket());
         audioController.PlayButtonAudio();
 
     }
