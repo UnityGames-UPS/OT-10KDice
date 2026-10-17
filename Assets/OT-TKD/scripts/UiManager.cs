@@ -10,19 +10,19 @@ public class UiManager : MonoBehaviour
 {
 
     [SerializeField]
-    internal List<float> multiplierObjsYPositions = new List<float>();
+    private List<float> multiplierObjsYPositions = new List<float>();
     [SerializeField]
-    internal float multiplierObjHeight;
+    private float multiplierObjHeight;
     [SerializeField]
-    internal float startPosition;
+    private float startPosition;
     [SerializeField]
     private Sprite manualSpriteEnabled, autoSpriteEnabled, manualSpriteDisabled, autoSpriteDisabled;
     [SerializeField]
-    internal Button autoBetToggle;
+    private Button autoBetToggle;
     [SerializeField]
     private Button ManualBetToggle;
     [SerializeField]
-    internal Button StopAutoBet;
+    private Button StopAutoBet;
     [SerializeField]
     private GameObject AutoBetSection;
     [SerializeField]
@@ -93,7 +93,7 @@ public class UiManager : MonoBehaviour
     private Button CrossQuit_Button;
 
     [SerializeField]
-    internal GameObject touchDisable;
+    private GameObject touchDisable;
     [SerializeField]
     private Button Settings_Button;
     [SerializeField]

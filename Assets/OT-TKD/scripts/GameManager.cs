@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
 
     private double currentTotalBet = 0;
     private double currentBalance;
-    internal int BetCounter;
-    internal int BallCounter;
+    private int BetCounter;
+    private int BallCounter;
     [SerializeField]
     List<TextMeshProUGUI> riskContainers = new List<TextMeshProUGUI>();
     [SerializeField]
@@ -49,31 +49,31 @@ public class GameManager : MonoBehaviour
     private TMP_Text autoBetCount_text;
     [SerializeField]
     TMP_InputField autoBetField;
-    internal int autoBetTotalCount, autoBetCurrentCount;
+    private int autoBetTotalCount, autoBetCurrentCount;
     [SerializeField]
     internal float autoBetFrequency = 0.5f;
     bool isAutoBetPlaying;
     bool autoBetInstanceDone;
-    internal int totalMarbleInAction;
+    private int totalMarbleInAction;
     Coroutine autoBetCoroutine;
     [SerializeField]
     SocketIOManager socketIoManager;
     [SerializeField]
-    internal UiManager uiManager;
-    internal gameType _gameType = gameType.TWELVE;
+    private UiManager uiManager;
+    private gameType _gameType = gameType.TWELVE;
     int currentLines = 20;
     int riskfactor = 0;
     bool isAutoBet, isAutobetInstanceDone, autobetRunning;
     [SerializeField] GameObject autoBetpanel;
     [SerializeField] GameObject touchDisable;
-    public enum marbleType
+    private enum marbleType
     {
         RED,
         YELLOW,
         GREEN
     }
 
-    public enum gameType
+    private enum gameType
     {
         TWELVE,
         SIXTEEN
@@ -253,7 +253,7 @@ public class GameManager : MonoBehaviour
 
 
 
-    public double CalculateMultiplier(double selectedX, double targetRTP, double houseEdge, int range)
+    private double CalculateMultiplier(double selectedX, double targetRTP, double houseEdge, int range)
     {
         double multiplier = 0;
 
@@ -612,7 +612,7 @@ public class GameManager : MonoBehaviour
         if (currentBalance < currentTotalBet) lowBalance();
     }
 
-    internal void updateBalance(double amount, bool add)
+    private void updateBalance(double amount, bool add)
     {
         if (add)
         {
@@ -628,7 +628,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    internal void checkForFallingMarbles()
+    private void checkForFallingMarbles()
     {
         if (totalMarbleInAction == 0)
         {

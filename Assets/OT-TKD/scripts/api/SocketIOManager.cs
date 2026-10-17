@@ -17,7 +17,7 @@ using Best.HTTP.Shared;
 public class SocketIOManager : MonoBehaviour
 {
   [SerializeField]
-  internal GameManager gameManager;
+  private GameManager gameManager;
 
   [SerializeField]
   private UiManager uiManager;
@@ -26,7 +26,7 @@ public class SocketIOManager : MonoBehaviour
   internal Payload resultData = null;
   internal Player playerdata = null;
   [SerializeField]
-  internal List<string> bonusdata = null;
+  private List<string> bonusdata = null;
   //WebSocket currentSocket = null;
   internal bool isResultdone = false;
   // protected string nameSpace="game"; //BackendChanges
@@ -39,15 +39,15 @@ public class SocketIOManager : MonoBehaviour
   protected string SocketURI = null;
   // protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
   protected string TestSocketURI = "http://localhost:5000/";
-  [SerializeField] internal JSFunctCalls JSManager;
+  [SerializeField] private JSFunctCalls JSManager;
   [SerializeField]
   private string testToken;
   protected string gameID = "SL-WB";
   //protected string gameID = "";
 
-  internal bool isLoaded = false;
+  private bool isLoaded = false;
 
-  internal bool SetInit = false;
+  private bool SetInit = false;
 
   private const int maxReconnectionAttempts = 6;
   private readonly TimeSpan reconnectionDelay = TimeSpan.FromSeconds(10);
@@ -640,7 +640,7 @@ public class SocketIOManager : MonoBehaviour
     return stringList;
   }
 
-  internal List<int> ConvertListListIntToListint(List<List<int>> listOfLists)
+  private List<int> ConvertListListIntToListint(List<List<int>> listOfLists)
   {
     List<int> resultList = new List<int>();
 
@@ -720,7 +720,7 @@ public class GameData
   public double targetRTP { get; set; }
 }
 
-public class Message
+internal class Message
 {
   public GameData GameData { get; set; }
   public Player PlayerData { get; set; }

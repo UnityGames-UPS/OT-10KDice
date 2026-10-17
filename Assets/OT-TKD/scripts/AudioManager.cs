@@ -6,8 +6,8 @@ using System;
 public class AudioManager : MonoBehaviour
 {
     [SerializeField] private AudioSource bg_adudio;
-    [SerializeField] internal AudioSource audioPlayer_wl;
-    [SerializeField] internal AudioSource audioPlayer_button;
+    [SerializeField] private AudioSource audioPlayer_wl;
+    [SerializeField] private AudioSource audioPlayer_button;
     [SerializeField] private AudioClip[] clips;
 
     private void Start()
@@ -61,14 +61,14 @@ public class AudioManager : MonoBehaviour
     {
         PlayWLAudio("bet");
     }
-    internal void StopWLAaudio()
+    private void StopWLAaudio()
     {
         audioPlayer_wl.Stop();
         audioPlayer_wl.loop = false;
     }
 
 
-    internal void StopBgAudio()
+    private void StopBgAudio()
     {
         bg_adudio.Stop();
     }
